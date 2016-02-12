@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("timberforest.app")
 public class Application {
     public static void main(String[] args) throws Exception {
-        // AnsiOutput.setEnabled(Enabled.ALWAYS);
         SpringApplication.run(Application.class, args);
     }
 }
