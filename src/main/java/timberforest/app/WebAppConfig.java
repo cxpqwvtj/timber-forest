@@ -14,7 +14,6 @@ public class WebAppConfig extends WebMvcAutoConfigurationAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) { // for logging
-        // registry.addInterceptor(new GodHandableControllerInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new RequestLoggingInterceptor()).addPathPatterns("/**");
     }
 

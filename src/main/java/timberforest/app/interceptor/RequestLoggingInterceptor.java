@@ -15,26 +15,26 @@ public class RequestLoggingInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        logger.trace("");
+        logger.trace("preHandle");
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-        logger.trace("");
+        logger.trace("postHandle");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        logger.trace("");
+        logger.trace("afterCompletion");
     }
 
     @Override
     public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        logger.trace("");
+        logger.trace("afterConcurrentHandlingStarted");
     }
 
 }
