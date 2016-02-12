@@ -28,6 +28,8 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
+.classpath
+.project
 /bin/
 /log/
 /src/main/resources/config/application-local.yml
