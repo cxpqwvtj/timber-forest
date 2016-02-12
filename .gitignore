@@ -29,3 +29,6 @@ gradle-app.setting
 .gradletasknamecache
 
 /bin/
+/log/
+/src/main/resources/config/application-local.yml
+
