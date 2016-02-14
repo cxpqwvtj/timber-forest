@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import timberforest.app.dto.json.LogFileJsonRequest;
 import timberforest.app.dto.json.LogFileJsonResponse;
 
 @RestController
@@ -25,7 +25,7 @@ public class LogFileUploadController {
     private static final Logger logger = LoggerFactory.getLogger(LogFileUploadController.class);
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public LogFileJsonResponse upload(@RequestPart Map<String, Object> fileInfo, @RequestParam MultipartFile zipLogFile)
+    public LogFileJsonResponse upload(@RequestPart LogFileJsonRequest fileInfo, @RequestParam MultipartFile zipLogFile)
             throws IOException {
         Path userDir = new File(System.getProperty("user.dir")).toPath();
         // TODO:デバイス名はリクエストから取得
