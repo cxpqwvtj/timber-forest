@@ -27,25 +27,29 @@ public class LogFileUploadController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public LogFileJsonResponse upload(@RequestPart Map<String, Object> fileInfo, @RequestParam MultipartFile zipLogFile)
             throws IOException {
-        logger.trace(fileInfo.toString() + zipLogFile.toString());
         Path userDir = new File(System.getProperty("user.dir")).toPath();
+        // TODO:デバイス名はリクエストから取得
         Path logDir = userDir.resolve("timber/device-name/");
         if (logDir.toFile().exists()) {
             // NOP
         } else if (logDir.toFile().mkdirs()) {
             // ログ保存ディレクトリ作成成功
         } else {
-            logger.warn("ログ保存ディレクトリの作成に失敗しました");
+            String message = "ログ保存ディレクトリの作成に失敗しました" + logDir.normalize().toString();
+            logger.warn(message);
             LogFileJsonResponse response = new LogFileJsonResponse();
             response.setSuccess(false);
+            response.setErrorMessage(message);
             return response;
         }
         // TODO:ファイル名はリクエストから取得
-        File logFile = logDir.resolve("logFileNmae.zip").toFile();
+        File logFile = logDir.resolve(zipLogFile.getOriginalFilename()).toFile();
         if (logFile.exists()) {
-            logger.warn("ログログファイルがすでに存在します");
+            String message = "ログファイルがすでに存在します " + zipLogFile.getOriginalFilename();
+            logger.warn(message);
             LogFileJsonResponse response = new LogFileJsonResponse();
             response.setSuccess(false);
+            response.setErrorMessage(message);
             return response;
         }
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(logFile))) {
