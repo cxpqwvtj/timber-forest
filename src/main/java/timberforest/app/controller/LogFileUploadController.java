@@ -26,8 +26,8 @@ public class LogFileUploadController {
     private static final Logger logger = LoggerFactory.getLogger(LogFileUploadController.class);
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public LogFileJsonResponse upload(@RequestPart LogFileJsonRequest fileInfo, @RequestParam MultipartFile zipLogFile)
-            throws IOException {
+    public LogFileJsonResponse upload(@RequestPart LogFileJsonRequest fileInfo,
+            @RequestParam MultipartFile zipLogFile) {
         Path userDir = new File(System.getProperty("user.dir")).toPath();
         if (StringUtils.isEmpty(fileInfo.getName())) {
             String message = "デバイス名がありません" + fileInfo.toString();
@@ -63,6 +63,13 @@ public class LogFileUploadController {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(logFile))) {
             bos.write(zipLogFile.getBytes());
             bos.flush();
+        } catch (IOException e) {
+            String message = "ファイルの保存に失敗しました " + logFile.getName();
+            logger.warn(message);
+            LogFileJsonResponse response = new LogFileJsonResponse();
+            response.setSuccess(false);
+            response.setErrorMessage(message);
+            return response;
         }
 
         // TODO:リクエストで来たJSONも保存する
