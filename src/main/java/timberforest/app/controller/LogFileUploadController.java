@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +29,15 @@ public class LogFileUploadController {
     public LogFileJsonResponse upload(@RequestPart LogFileJsonRequest fileInfo, @RequestParam MultipartFile zipLogFile)
             throws IOException {
         Path userDir = new File(System.getProperty("user.dir")).toPath();
-        // TODO:デバイス名はリクエストから取得
-        Path logDir = userDir.resolve("timber/device-name/");
+        if (StringUtils.isEmpty(fileInfo.getName())) {
+            String message = "デバイス名がありません" + fileInfo.toString();
+            logger.warn(message);
+            LogFileJsonResponse response = new LogFileJsonResponse();
+            response.setSuccess(false);
+            response.setErrorMessage(message);
+            return response;
+        }
+        Path logDir = userDir.resolve(String.format("timber/%s/", fileInfo.getName()));
         if (logDir.toFile().exists()) {
             // NOP
         } else if (logDir.toFile().mkdirs()) {
