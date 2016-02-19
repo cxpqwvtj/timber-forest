@@ -34,3 +34,5 @@ gradle-app.setting
 /log/
 /src/main/resources/config/application-local.yml
 /timber/
+/.idea/libraries/*
+/.idea/workspace.xml
