@@ -36,4 +36,7 @@ gradle-app.setting
 /timber/
 /.idea/libraries/*
 /.idea/workspace.xml
-/.idea/uiDesigner.xml
+#/.idea/uiDesigner.xml
+*.iml
+*.iws
+
