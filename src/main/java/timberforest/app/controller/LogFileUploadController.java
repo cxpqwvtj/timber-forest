@@ -27,7 +27,7 @@ public class LogFileUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public LogFileJsonResponse upload(@RequestPart LogFileJsonRequest fileInfo,
-            @RequestParam MultipartFile zipLogFile) {
+                                      @RequestParam MultipartFile zipLogFile) {
         Path userDir = new File(System.getProperty("user.dir")).toPath();
         if (StringUtils.isEmpty(fileInfo.getName())) {
             String message = "デバイス名がありません" + fileInfo.toString();
@@ -40,8 +40,10 @@ public class LogFileUploadController {
         Path logDir = userDir.resolve(String.format("timber/%s/", fileInfo.getName()));
         if (logDir.toFile().exists()) {
             // NOP
+            logger.trace("ディレクトリ存在確認 %s", logDir.toFile().getPath());
         } else if (logDir.toFile().mkdirs()) {
             // ログ保存ディレクトリ作成成功
+            logger.info(String.format("ディレクトリ作成 %s", logDir.toFile().getPath()));
         } else {
             String message = "ログ保存ディレクトリの作成に失敗しました" + logDir.normalize().toString();
             logger.warn(message);
