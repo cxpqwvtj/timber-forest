@@ -39,4 +39,5 @@ gradle-app.setting
 #/.idea/uiDesigner.xml
 *.iml
 *.iws
+/out/*
 
