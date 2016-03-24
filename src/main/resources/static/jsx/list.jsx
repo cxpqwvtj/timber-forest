@@ -1,7 +1,19 @@
-var ListBox = React.createClass({
+var Container = React.createClass({
   render: function() {
     return (
-      <div></div>
+      <div>
+        <ListBox />
+      </div>
     );
   }
 });
+
+var ListBox = React.createClass({
+  render: function() {
+    return (
+      <div>テスト</div>
+    );
+  }
+});
+
+ReactDOM.render(<Container />, document.getElementById("container"));
