@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class RootJsonResopnse {
-    private boolean success;
+    private boolean success = true;
     private String errorMessage = "";
 }
