@@ -30,14 +30,13 @@ gradle-app.setting
 
 .classpath
 .project
-/bin/
-/log/
+/bin/*
+/log/*
 /src/main/resources/config/application-local.yml
-/timber/
-/.idea/libraries/*
-/.idea/workspace.xml
-#/.idea/uiDesigner.xml
+/timber/*
+/.idea/*
 *.iml
 *.iws
+*.ipr
 /out/*
 
