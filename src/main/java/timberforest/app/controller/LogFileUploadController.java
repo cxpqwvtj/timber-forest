@@ -40,7 +40,7 @@ public class LogFileUploadController {
         Path logDir = userDir.resolve(String.format("timber/%s/", fileInfo.getName()));
         if (logDir.toFile().exists()) {
             // NOP
-            logger.trace("ディレクトリ存在確認 %s", logDir.toFile().getPath());
+            logger.trace(String.format("ディレクトリ存在確認 %s", logDir.toFile().getPath()));
         } else if (logDir.toFile().mkdirs()) {
             // ログ保存ディレクトリ作成成功
             logger.info(String.format("ディレクトリ作成 %s", logDir.toFile().getPath()));
