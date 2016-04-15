@@ -7,9 +7,9 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    classpath("org.springframework:springloaded:1.2.5.RELEASE")
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    classpath "org.springframework:springloaded:1.2.5.RELEASE"
   }
 }
 
@@ -30,7 +30,7 @@ jar {
 }
 
 dependencies {
-  compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+  compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
   compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
   testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
