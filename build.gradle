@@ -24,17 +24,8 @@ apply plugin: "spring-boot"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jar {
-  baseName = "timber-forest"
-  version =  "0.0.1-SNAPSHOT"
-}
-
 dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
   compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
   testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.12'
 }
