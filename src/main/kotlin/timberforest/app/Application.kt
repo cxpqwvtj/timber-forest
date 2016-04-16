@@ -2,10 +2,10 @@ package timberforest.app
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
-@Throws(Exception::class)
 fun main(args: Array<String>) {
     SpringApplication.run(Application::class.java, *args)
 }
@@ -16,5 +16,6 @@ fun main(args: Array<String>) {
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan("timberforest.app")
+@SpringBootApplication
 open class Application {
 }

@@ -9,7 +9,7 @@ buildscript {
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    classpath "org.springframework:springloaded:1.2.5.RELEASE"
+    classpath "org.springframework:springloaded:1.2.6.RELEASE"
   }
 }
 
