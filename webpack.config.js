@@ -8,8 +8,8 @@ module.exports = {
   },
   output: {
     path: __dirname + '/src/main/resources/static',
-    filename: '[name].js'
-    //publicPath: '/'
+    filename: '[name].js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -18,7 +18,10 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      title: 'timber-forest',
+      template: 'index.ejs'
+    })
   ],
   module: {
     loaders: [
