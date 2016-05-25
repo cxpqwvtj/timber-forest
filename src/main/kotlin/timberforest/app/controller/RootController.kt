@@ -15,10 +15,4 @@ class RootController {
     fun root(): String {
         return "redirect:index.html"
     }
-
-    @RequestMapping(value = "index.html", method = arrayOf(RequestMethod.GET))
-    @ResponseBody
-    fun index(): String {
-        return "<div><h1>index.htmlにアクセスがきたZa</h1></div>"
-    }
 }
