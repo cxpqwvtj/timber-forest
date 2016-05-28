@@ -10,10 +10,6 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
-app.use(function(req, res) {
-  res.sendFile(__dirname + '../client/index.html')
-})
-
 app.listen(port, function(error) {
   if (error) {
     console.error(error)
