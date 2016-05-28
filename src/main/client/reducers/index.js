@@ -2,6 +2,11 @@ import * as ActionTypes from '../actions'
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
+function entities(state = {}, action) {
+  console.log(`reducers/index#entities ${action.type}`)
+  return state
+}
+
 // Updates error message to notify about the failed fetches.
 function errorMessage(state = null, action) {
   const { type, error } = action
@@ -16,6 +21,7 @@ function errorMessage(state = null, action) {
 }
 
 const rootReducer = combineReducers({
+  entities,
   errorMessage,
   routing
 })

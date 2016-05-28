@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   context: __dirname + '/src/main/client',
   entry: {
-    'js/bundle': './index.js'
+    'js/bundle': ['webpack-hot-middleware/client', './index.js']
   },
   output: {
     path: __dirname + '/src/main/resources/static',

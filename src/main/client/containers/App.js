@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { resetErrorMessage } from '../actions'
+import { load, resetErrorMessage } from '../actions'
 
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles'
-import { AppBar } from 'material-ui'
+import { AppBar, RaisedButton } from 'material-ui'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
@@ -14,6 +14,11 @@ class App extends Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleDismissClick = this.handleDismissClick.bind(this)
+    this.buttonClick = this.buttonClick.bind(this)
+  }
+
+  buttonClick(e) {
+    this.props.load(e, [])
   }
 
   handleDismissClick(e) {
@@ -46,16 +51,22 @@ class App extends Component {
   render() {
     const { children } = this.props
     return (
-      <div>
-        <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <div>
           <AppBar
             title="timber-forest"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
-        </MuiThemeProvider>
-        {children}
-        {this.renderErrorMessage()}
-      </div>
+          <div style={{margin: 10}}>
+            <RaisedButton label="テスト" onMouseUp={this.buttonClick} />
+          </div>
+          <div style={{margin: 10}}>
+            <RaisedButton label="ボタン2" />
+          </div>
+          {children}
+          {this.renderErrorMessage()}
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
@@ -66,10 +77,12 @@ App.propTypes = {
   resetErrorMessage: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   // Injected by React Router
-  children: PropTypes.node
+  children: PropTypes.node,
+  load: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('App#mapStateToProps')
   return {
     errorMessage: state.errorMessage,
     inputValue: ownProps.location.pathname.substring(1)
@@ -77,5 +90,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
+  load,
   resetErrorMessage
 })(App)
