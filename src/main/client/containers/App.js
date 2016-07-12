@@ -12,7 +12,6 @@ injectTapEventPlugin()
 class App extends Component {
   constructor(props) {
     super(props)
-    this.handleChange = this.handleChange.bind(this)
     this.handleDismissClick = this.handleDismissClick.bind(this)
     this.buttonClick = this.buttonClick.bind(this)
   }
@@ -26,7 +25,7 @@ class App extends Component {
     e.preventDefault()
   }
 
-  handleChange(nextValue) {
+  handleChange = (nextValue) => {
     browserHistory.push(`/${nextValue}`)
   }
 
