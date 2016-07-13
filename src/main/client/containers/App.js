@@ -4,7 +4,8 @@ import { browserHistory } from 'react-router'
 import { load, resetErrorMessage } from '../actions'
 
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles'
-import { AppBar, RaisedButton } from 'material-ui'
+
+import Contents from '../components/Contents'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
@@ -51,20 +52,7 @@ class App extends Component {
     const { children } = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <div>
-          <AppBar
-            title="timber-forest"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
-          <div style={{margin: 10}}>
-            <RaisedButton label="テスト" onMouseUp={this.buttonClick} />
-          </div>
-          <div style={{margin: 10}}>
-            <RaisedButton label="ボタン2" />
-          </div>
-          {children}
-          {this.renderErrorMessage()}
-        </div>
+        <Contents children={children} />
       </MuiThemeProvider>
     )
   }
