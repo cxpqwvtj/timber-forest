@@ -40,7 +40,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loaders: [...(DEBUG ? ['react-hot'] : []), 'babel']
       },
       {
         test: /\.css?$/,
