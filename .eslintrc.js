@@ -28,6 +28,7 @@ module.exports = {
     "semi": [
       2,
       "never"
-    ]
+    ],
+    "no-constant-condition": [0]
   }
 };

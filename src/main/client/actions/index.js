@@ -1,25 +1,25 @@
-const CALL_API = 'CALL_API'
+const REQUEST = 'REQUEST'
+const SUCCESS = 'SUCCESS'
+const FAILURE = 'FAILURE'
 
-export const API_REQUEST = 'API_REQUEST'
-export const API_SUCCESS = 'API_SUCCESS'
-export const API_FAILURE = 'API_FAILURE'
-
-export function load(params, requireFields = []) {
-  console.log('actions#load1')
-  return (dispatch, getState) => {
-    console.log('actions#load2')
-    return dispatch(fetchData(params))
-  }
+function createRequestTypes(base) {
+  return [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
+		acc[type] = `${base}_${type}`
+		return acc
+	}, {})
 }
 
-function fetchData(params) {
-  return {
-      [CALL_API]: {
-        types: [ API_REQUEST, API_SUCCESS, API_FAILURE ],
-        endpoint: `api/endpoint${params}`,
-        schema: 'schemaName'
-    }
-  }
+export const LOGS = createRequestTypes('LOGS')
+export const LOAD_LOGS = 'LOAD_LOGS'
+
+function action(type, payload = {}) {
+  return {type, ...payload}
+}
+
+export const logs = {
+  request: (param) => action(LOGS.REQUEST, {param}),
+  success: (param, response) => action(LOGS.SUCCESS, {param, response}),
+  failure: (param, error) => action(LOGS.FAILURE, {param, error}),
 }
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
@@ -30,3 +30,5 @@ export function resetErrorMessage() {
     type: RESET_ERROR_MESSAGE
   }
 }
+
+export const loadLogs = (param) => action(LOAD_LOGS, param)

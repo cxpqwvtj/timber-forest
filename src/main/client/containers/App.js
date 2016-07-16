@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { load, resetErrorMessage } from '../actions'
+import { resetErrorMessage } from '../actions'
 
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles'
 
@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   buttonClick(e) {
-    this.props.load(e, [])
   }
 
   handleDismissClick(e) {
@@ -64,12 +63,10 @@ App.propTypes = {
   resetErrorMessage: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   // Injected by React Router
-  children: PropTypes.node,
-  load: PropTypes.func.isRequired
+  children: PropTypes.node
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('App#mapStateToProps')
   return {
     errorMessage: state.errorMessage,
     inputValue: ownProps.location.pathname.substring(1)
@@ -77,6 +74,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-  load,
   resetErrorMessage
 })(App)

@@ -1,7 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { RaisedButton } from 'material-ui'
+import { loadLogs } from '../actions'
+
+import { connect } from 'react-redux'
 
 export default class MainContent extends Component {
+
+  static propTypes = {
+    errorMessage: PropTypes.string,
+    children: PropTypes.node,
+    loadLogs: PropTypes.func.isRequired
+  }
 
   renderErrorMessage() {
     const { errorMessage } = this.props
@@ -21,6 +30,10 @@ export default class MainContent extends Component {
     )
   }
 
+  fetchData = () => {
+    this.props.loadLogs({endpoint: '/api/filelist'})
+  }
+
   render() {
     return (
       <div>
@@ -28,7 +41,7 @@ export default class MainContent extends Component {
             <RaisedButton label="テスト" onMouseUp={this.buttonClick} />
           </div>
           <div style={{margin: 10}}>
-            <RaisedButton label="ボタン2" />
+            <RaisedButton label="ボタン2" onMouseUp={this.fetchData} />
           </div>
           {this.props.children}
           {this.renderErrorMessage()}
@@ -37,7 +50,10 @@ export default class MainContent extends Component {
   }
 }
 
-MainContent.propTypes = {
-  errorMessage: PropTypes.string,
-  children: PropTypes.node
+function mapStateToProps(state) {
+  return state
 }
+
+export default connect(mapStateToProps, {
+  loadLogs
+})(MainContent)
