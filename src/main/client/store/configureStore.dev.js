@@ -10,7 +10,9 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(sagaMiddleware, createLogger()),
+      applyMiddleware(sagaMiddleware, createLogger({
+        collapsed: () => true
+      })),
       DevTools.instrument()
     )
   )
