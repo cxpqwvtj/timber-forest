@@ -3,7 +3,6 @@ import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
 function entities(state = {}, action) {
-  console.log(action)
   if (action.response) {
     return Object.assign({}, state, action.response)
   }
