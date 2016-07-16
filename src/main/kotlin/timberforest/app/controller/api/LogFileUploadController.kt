@@ -4,8 +4,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.util.StringUtils
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import timberforest.app.dto.json.ErrorJsonResponse
 import timberforest.app.dto.json.LogFileJsonRequest
-import timberforest.app.dto.json.LogFileJsonResponse
+import timberforest.app.dto.json.RootJsonResponse
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -22,15 +23,12 @@ class LogFileUploadController {
 
     @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST))
     fun upload(@RequestPart fileInfo: LogFileJsonRequest,
-               @RequestParam zipLogFile: MultipartFile): LogFileJsonResponse {
+               @RequestParam zipLogFile: MultipartFile): RootJsonResponse {
         val userDir = File(System.getProperty("user.dir")).toPath()
         if (StringUtils.isEmpty(fileInfo.name)) {
             val message = "デバイス名がありません" + fileInfo.toString()
             logger.warn(message)
-            val response = LogFileJsonResponse()
-            response.success = false
-            response.errorMessage = message
-            return response
+            return RootJsonResponse(ErrorJsonResponse("1", message))
         }
         val logDir = userDir.resolve(String.format("timber/%s/", fileInfo.name))
         if (logDir.toFile().exists()) {
@@ -42,20 +40,14 @@ class LogFileUploadController {
         } else {
             val message = "ログ保存ディレクトリの作成に失敗しました" + logDir.normalize().toString()
             logger.warn(message)
-            val response = LogFileJsonResponse()
-            response.success = false
-            response.errorMessage = message
-            return response
+            return RootJsonResponse(ErrorJsonResponse("1", message))
         }
         // TODO:ファイル名はリクエストから取得
         val logFile = logDir.resolve(zipLogFile.originalFilename).toFile()
         if (logFile.exists()) {
             val message = "ログファイルがすでに存在します " + zipLogFile.originalFilename
             logger.warn(message)
-            val response = LogFileJsonResponse()
-            response.success = false
-            response.errorMessage = message
-            return response
+            return RootJsonResponse(ErrorJsonResponse("1", message))
         }
         try {
             BufferedOutputStream(FileOutputStream(logFile)).use { bos ->
@@ -65,16 +57,11 @@ class LogFileUploadController {
         } catch (e: IOException) {
             val message = "ファイルの保存に失敗しました " + logFile.name
             logger.warn(message)
-            val response = LogFileJsonResponse()
-            response.success = false
-            response.errorMessage = message
-            return response
+            return RootJsonResponse(ErrorJsonResponse("1", message))
         }
 
         // TODO:リクエストで来たJSONも保存する
         logger.info(String.format("ファイルを保存しました。%s", logFile.name))
-        val response = LogFileJsonResponse()
-        response.success = true
-        return response
+        return RootJsonResponse(Object())
     }
 }
