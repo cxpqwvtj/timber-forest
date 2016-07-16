@@ -46,9 +46,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=development webpack --progress",
-    "package": "NODE_ENV=production webpack --release --progress",
+    "build": "NODE_ENV=development webpack --progress --colors",
+    "package": "NODE_ENV=production webpack --release --progress --colors",
     "start": "NODE_ENV=development node src/main/client-dev-server/server.js",
-    "watch": "babel -w src -d dist"
+    "watch": "NODE_ENV=development webpack --watch --progress --colors"
   }
 }

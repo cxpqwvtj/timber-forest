@@ -3,7 +3,6 @@ import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
 function entities(state = {}, action) {
-  console.log(`reducers/index#entities ${action.type}`)
   return state
 }
 

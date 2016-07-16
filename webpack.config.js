@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const DEBUG = !process.argv.includes('--release')
+const DEBUG = !(process.env.NODE_ENV === 'production')
 const VERBOSE = process.argv.includes('--verbose')
 let CONTEXT_PATH = `${(process.env.CONTEXT_PATH || '')}`
 
