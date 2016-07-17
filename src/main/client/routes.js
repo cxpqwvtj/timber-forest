@@ -5,6 +5,6 @@ import FileListPage from './containers/FileListPage'
 
 export default (
   <Route path={`${process.env.CONTEXT_PATH}/`} component={App}>
-    <Route path='filelist' component={FileListPage} />
+    <Route path='file/list' component={FileListPage} />
   </Route>
 )

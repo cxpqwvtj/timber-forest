@@ -34,7 +34,7 @@ export default class MainContent extends Component {
             <RaisedButton label="TOP" href='/' />
           </div>
           <div style={{margin: 10}}>
-            <RaisedButton label="ボタン2" onMouseUp={this.props.handleUrlChange.bind(null, '/filelist')} />
+            <RaisedButton label="ログ一覧" onMouseUp={this.props.handleUrlChange.bind(null, '/file/list')} />
           </div>
           {this.props.children}
           {this.renderErrorMessage()}
