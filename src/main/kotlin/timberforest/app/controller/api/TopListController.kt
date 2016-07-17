@@ -19,7 +19,7 @@ class TopListController {
 
     private val logger = LoggerFactory.getLogger(TopListController::class.java)
 
-    @RequestMapping(value = "/filelist", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/file/list", method = arrayOf(RequestMethod.GET))
     fun index(): RootJsonResponse {
         logger.trace("index")
         val currentPath = File(System.getProperty("user.dir")).toPath()

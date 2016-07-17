@@ -10,7 +10,7 @@ class FileListPage extends Component {
   }
 
  componentDidMount() {
-   this.props.loadLogs({endpoint: '/api/filelist'})
+   this.props.loadLogs()
  }
 
   render() {

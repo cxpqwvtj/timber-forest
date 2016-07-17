@@ -31,4 +31,4 @@ export function resetErrorMessage() {
   }
 }
 
-export const loadLogs = (param) => action(LOAD_LOGS, param)
+export const loadLogs = () => action(LOAD_LOGS, {endpoint: '/api/file/list'})
