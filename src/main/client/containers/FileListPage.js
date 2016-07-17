@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import { loadLogs } from '../actions'
 
 class FileListPage extends Component {
@@ -13,19 +14,27 @@ class FileListPage extends Component {
  }
 
   render() {
-    const rows = Object.entries(this.props.logFiles).map(([fileName, fileInfo], index) => <tr key={index}><td>{fileName}</td><td>{fileInfo.fileSize}</td><td>{fileInfo.formattedUpdateDate}</td></tr>)
+    const rows = Object.entries(this.props.logFiles).map(([fileName, fileInfo], index) => {
+      return (
+        <TableRow key={index}>
+          <TableRowColumn>{fileName}</TableRowColumn>
+          <TableRowColumn>{fileInfo.fileSize}</TableRowColumn>
+          <TableRowColumn>{fileInfo.formattedUpdateDate}</TableRowColumn>
+        </TableRow>
+      )
+    })
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>ファイル名</th>
-              <th>サイズ(B)</th>
-              <th>更新日</th>
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-        </table>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderColumn>ファイル名</TableHeaderColumn>
+              <TableHeaderColumn>サイズ(B)</TableHeaderColumn>
+              <TableHeaderColumn>更新日</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody>{rows}</TableBody>
+        </Table>
       </div>
     )
   }
