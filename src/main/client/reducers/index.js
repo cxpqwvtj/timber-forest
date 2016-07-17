@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 
 function entities(state = {}, action) {
   if (action.response) {
-    return Object.assign({}, state, action.response)
+    return Object.assign({}, state, action.response.result)
   }
   return state
 }

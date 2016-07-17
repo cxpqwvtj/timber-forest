@@ -11,13 +11,16 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
 class App extends Component {
+  static propTypes = {
+    errorMessage: PropTypes.string,
+    resetErrorMessage: PropTypes.func.isRequired,
+    inputValue: PropTypes.string.isRequired,
+    children: PropTypes.node
+  }
+
   constructor(props) {
     super(props)
     this.handleDismissClick = this.handleDismissClick.bind(this)
-    this.buttonClick = this.buttonClick.bind(this)
-  }
-
-  buttonClick(e) {
   }
 
   handleDismissClick(e) {
@@ -25,8 +28,8 @@ class App extends Component {
     e.preventDefault()
   }
 
-  handleChange = (nextValue) => {
-    browserHistory.push(`/${nextValue}`)
+  handleUrlChange = (nextValue) => {
+    browserHistory.push(`${process.env.CONTEXT_PATH}${nextValue}`)
   }
 
   renderErrorMessage() {
@@ -51,19 +54,10 @@ class App extends Component {
     const { children } = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Contents children={children} />
+        <Contents children={children} handleUrlChange={this.handleUrlChange} />
       </MuiThemeProvider>
     )
   }
-}
-
-App.propTypes = {
-  // Injected by React Redux
-  errorMessage: PropTypes.string,
-  resetErrorMessage: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
-  // Injected by React Router
-  children: PropTypes.node
 }
 
 function mapStateToProps(state, ownProps) {
