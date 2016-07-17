@@ -4,7 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
-import timberforest.app.dto.json.LogFileListJsonResponse
+import timberforest.app.dto.json.FileInfoJsonResponse
+import timberforest.app.dto.json.LogFileJsonResponse
 import timberforest.app.dto.json.RootJsonResponse
 import java.io.File
 import java.util.*
@@ -22,12 +23,14 @@ class TopListController {
     fun index(): RootJsonResponse {
         logger.trace("index")
         val currentPath = File(System.getProperty("user.dir")).toPath()
-        val response = LogFileListJsonResponse()
+        val logFileInfo = mutableMapOf<String, FileInfoJsonResponse>()
         for (file in nestedFiles(currentPath.resolve("timber").toFile())) {
-            response.logFileList.add(currentPath.relativize(file.toPath()).toString())
+            val filePath = currentPath.relativize(file.toPath()).toString()
+            val fileInfo = FileInfoJsonResponse(file.length(), file.lastModified())
+            logFileInfo.put(filePath, fileInfo)
         }
 
-        return RootJsonResponse(response)
+        return RootJsonResponse(LogFileJsonResponse(logFileInfo))
     }
 
     private fun nestedFiles(rootDir: File): List<File> {
