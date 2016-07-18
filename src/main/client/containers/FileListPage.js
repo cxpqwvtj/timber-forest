@@ -14,10 +14,11 @@ class FileListPage extends Component {
  }
 
   render() {
-    const rows = Object.entries(this.props.logFiles).map(([fileName, fileInfo], index) => {
+    const rows = Object.entries(this.props.logFiles).map(([fileName, fileInfo]) => {
       return (
-        <TableRow key={index}>
-          <TableRowColumn>{fileName}</TableRowColumn>
+        <TableRow key={fileName}>
+          <TableRowColumn>{fileInfo.hostName}</TableRowColumn>
+          <TableRowColumn>{fileInfo.appName}</TableRowColumn>
           <TableRowColumn>{fileInfo.fileSize}</TableRowColumn>
           <TableRowColumn>{fileInfo.formattedUpdateDate}</TableRowColumn>
         </TableRow>
@@ -28,12 +29,13 @@ class FileListPage extends Component {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHeaderColumn>ファイル名</TableHeaderColumn>
-              <TableHeaderColumn>サイズ(B)</TableHeaderColumn>
-              <TableHeaderColumn>更新日</TableHeaderColumn>
+              <TableHeaderColumn>ホスト名</TableHeaderColumn>
+              <TableHeaderColumn>アプリID</TableHeaderColumn>
+              <TableHeaderColumn>サイズ(Byte)</TableHeaderColumn>
+              <TableHeaderColumn>アップロード時間</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>{rows}</TableBody>
+          <TableBody stripedRows={true} showRowHover={true}>{rows}</TableBody>
         </Table>
       </div>
     )
