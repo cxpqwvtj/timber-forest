@@ -20,7 +20,8 @@ class FileListPage extends Component {
           <TableRowColumn>{fileInfo.hostName}</TableRowColumn>
           <TableRowColumn>{fileInfo.appName}</TableRowColumn>
           <TableRowColumn>{fileInfo.fileSize}</TableRowColumn>
-          <TableRowColumn>{fileInfo.formattedUpdateDate}</TableRowColumn>
+          <TableRowColumn>{fileInfo.createdDate}</TableRowColumn>
+          <TableRowColumn>{fileInfo.uploadDate}</TableRowColumn>
         </TableRow>
       )
     })
@@ -32,6 +33,7 @@ class FileListPage extends Component {
               <TableHeaderColumn>host name</TableHeaderColumn>
               <TableHeaderColumn>appID</TableHeaderColumn>
               <TableHeaderColumn>Size(Byte)</TableHeaderColumn>
+              <TableHeaderColumn>created date</TableHeaderColumn>
               <TableHeaderColumn>upload date</TableHeaderColumn>
             </TableRow>
           </TableHeader>

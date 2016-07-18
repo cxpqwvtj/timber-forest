@@ -26,7 +26,7 @@ class TopListController {
         val logFileInfo = mutableMapOf<String, FileInfoJsonResponse>()
         for (file in nestedFiles(currentPath.resolve("timber").toFile())) {
             val filePath = currentPath.relativize(file.toPath()).toString()
-            val fileInfo = FileInfoJsonResponse(file.parentFile.name, file.nameWithoutExtension.split("_")[0], file.length(), file.lastModified())
+            val fileInfo = FileInfoJsonResponse(file)
             logFileInfo.put(filePath, fileInfo)
         }
 
