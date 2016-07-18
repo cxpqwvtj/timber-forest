@@ -29,10 +29,10 @@ class FileListPage extends Component {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHeaderColumn>ホスト名</TableHeaderColumn>
-              <TableHeaderColumn>アプリID</TableHeaderColumn>
-              <TableHeaderColumn>サイズ(Byte)</TableHeaderColumn>
-              <TableHeaderColumn>アップロード時間</TableHeaderColumn>
+              <TableHeaderColumn>host name</TableHeaderColumn>
+              <TableHeaderColumn>appID</TableHeaderColumn>
+              <TableHeaderColumn>Size(Byte)</TableHeaderColumn>
+              <TableHeaderColumn>upload date</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody stripedRows={true} showRowHover={true}>{rows}</TableBody>
