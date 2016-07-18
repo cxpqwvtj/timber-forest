@@ -6,8 +6,10 @@ export default class Header extends Component {
   render() {
     return (
       <AppBar
-        title="timber-forest"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
+        title='timber-forest'
+        titleStyle={{cursor: 'pointer'}}
+        showMenuIconButton={false}
+        onTitleTouchTap={() => window.location.pathname='/'}
       />
     )
   }
