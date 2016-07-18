@@ -12,7 +12,7 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler))
 app.use('/api', proxy({target: 'http://localhost:8080', changeOrigin: false}))
 
-app.get('/file*', function(req, res) {
+app.get('/timber*', function(req, res) {
   console.log('[req]', req.url)
   res.setHeader('Content-Type', 'text/html')
   res.send(compiler.outputFileSystem.readFileSync(compiler.outputPath + '/index.html'))
