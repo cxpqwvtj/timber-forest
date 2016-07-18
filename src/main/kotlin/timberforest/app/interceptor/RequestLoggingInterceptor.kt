@@ -14,7 +14,10 @@ class RequestLoggingInterceptor : HandlerInterceptorAdapter() {
 
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?): Boolean {
-        //        logger.trace("preHandle")
+        logger.trace("preHandle")
+        // queryString
+        // requestURI
+        //
         return true
     }
 
