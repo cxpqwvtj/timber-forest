@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 @Controller
 @RequestMapping("/")
 class RootController {
-    @RequestMapping(path = arrayOf("", "file/**"), method = arrayOf(RequestMethod.GET))
+    @RequestMapping(path = arrayOf("", "timber/**"), method = arrayOf(RequestMethod.GET))
     fun root(response: HttpServletResponse) {
         response.outputStream.use { it.write(this.javaClass.getResource("/static/index.html").readBytes()) }
     }
