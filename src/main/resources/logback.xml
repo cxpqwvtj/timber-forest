@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<timestamp key="bySecond" datePattern="yyyy-MM-dd_HH-mm-ss"/>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
 		<encoder>
@@ -10,7 +11,7 @@
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>./log/timber-forest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>./timber/localhost/timber-forest_%d{yyyy-MM-dd_HH-mm-ss}_%i.zip</fileNamePattern>
+			<fileNamePattern>./timber/timber-forest_${bySecond}_%i.log</fileNamePattern>
 			<minIndex>1</minIndex>
 			<maxIndex>2</maxIndex>
 		</rollingPolicy>
