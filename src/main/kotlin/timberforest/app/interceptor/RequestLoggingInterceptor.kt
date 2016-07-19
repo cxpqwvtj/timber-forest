@@ -15,21 +15,18 @@ class RequestLoggingInterceptor : HandlerInterceptorAdapter() {
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?): Boolean {
         logger.trace("preHandle")
-        // queryString
-        // requestURI
-        //
         return true
     }
 
     @Throws(Exception::class)
     override fun postHandle(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?,
                             modelAndView: ModelAndView?) {
-        //        logger.trace("postHandle")
+        logger.trace("postHandle")
     }
 
     @Throws(Exception::class)
     override fun afterCompletion(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?, ex: Exception?) {
-        //        logger.trace("afterCompletion")
+        logger.trace("afterCompletion")
     }
 
     @Throws(Exception::class)

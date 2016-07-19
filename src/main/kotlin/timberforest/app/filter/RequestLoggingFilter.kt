@@ -24,27 +24,8 @@ class RequestLoggingFilter : Filter {
     override fun doFilter(servletRequest: ServletRequest, servletResponse: ServletResponse, chain: FilterChain) {
         if (logger.isTraceEnabled) {
             val request = servletRequest as HttpServletRequest
-            val headerNames = request.headerNames
-
-            val map = LinkedHashMap<String, Any>()
-            map.put("URI", request.requestURI)
-            map.put("method", request.method)
-            map.put("URL", request.requestURL)
-
-            val header = LinkedHashMap<String, String>()
-            while (headerNames.hasMoreElements()) {
-                val key = headerNames.nextElement()
-                val value = request.getHeader(key)
-                header.put(key, value)
-            }
-            map.put("header", header)
-            if (request.method == "POST") {
-                map.put("content-length", request.contentLengthLong)
-            }
-            logger.trace("[REQUEST]" + ObjectMapper().writeValueAsString(map))
-
             val list = mutableListOf<String>()
-            list.add("*********************** Begin")
+            list.add("*********************** BEGIN")
             list.add("[URL]${request.requestURL} [query]${request.queryString} [SessionId]${request.requestedSessionId} [class]${request.javaClass.name}")
             list.add("[method]${request.method} [protocol]${request.protocol} [scheme]${request.scheme} [secure]${request.isSecure} [RemoteAddr]${request.remoteAddr} [RemoteHost]${request.remoteHost}")
             list.add("[encoding]${request.characterEncoding} [ContentLength]${request.contentLength} [contentType]${request.contentType} [locale]${request.locale} [locales]${request.locales.toList().joinToString(" ")}")
@@ -59,6 +40,7 @@ class RequestLoggingFilter : Filter {
             logger.trace(list.joinToString(LF))
         }
         chain.doFilter(servletRequest, servletResponse)
+        logger.trace("*********************** END$LF")
     }
 
     override fun destroy() {
