@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	<timestamp key="bySecond" datePattern="yyyy-MM-dd_HH-mm-ss"/>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
 		<encoder>
@@ -10,14 +9,13 @@
 	</appender>
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>./log/timber-forest.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>./timber/timber-forest_${bySecond}_%i.log</fileNamePattern>
-			<minIndex>1</minIndex>
-			<maxIndex>2</maxIndex>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./timber/${HOSTNAME}/timber-forest_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>1MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>10</maxHistory>
 		</rollingPolicy>
-		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>1MB</MaxFileSize>
-		</triggeringPolicy>
 		<encoder>
 			<charset>UTF-8</charset>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%p} [%t] %logger{1} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
