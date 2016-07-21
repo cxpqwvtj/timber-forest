@@ -2,9 +2,17 @@ import 'isomorphic-fetch'
 
 function callApi(requestParam) {
   const fullUrl = `${process.env.CONTEXT_PATH}${requestParam.endpoint}`
+  const param = {
+      method: requestParam.method,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestParam.body || null)
+    }
 
-  return fetch(fullUrl)
-    .then(response =>
+  return fetch(fullUrl, param
+    ).then(response =>
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
       if (!response.ok) {
@@ -23,4 +31,4 @@ function callApi(requestParam) {
 }
 
 // api services
-export const fetchLogs = requestParam => callApi(requestParam)
+export const fetchData = requestParam => callApi(requestParam)

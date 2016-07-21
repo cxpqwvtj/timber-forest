@@ -1,6 +1,8 @@
 package timberforest.app.dto.json
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -8,8 +10,9 @@ import java.util.*
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class ActivityTrailJsonRequest {
-    val timestamp = Date()
+    val timestamp = SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss.SSS").format(Date())
     var tag: String? = null
+    @JsonProperty("log_level")
     var log_level: String? = null
     var message: String? = null
     var action: String? = null

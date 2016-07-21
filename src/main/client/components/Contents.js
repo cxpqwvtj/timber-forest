@@ -7,13 +7,16 @@ import Footer from './Footer'
 export default class Contents extends Component {
   static propTypes = {
     handleUrlChange: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
+    handleTest: PropTypes.func.isRequired
   }
   render() {
     return (
       <div>
         <Header />
-        <MainContent handleUrlChange={this.props.handleUrlChange} children={this.props.children} />
+        <MainContent handleUrlChange={this.props.handleUrlChange}
+          children={this.props.children}
+          handleTest={this.props.handleTest} />
         <Footer />
       </div>
     )

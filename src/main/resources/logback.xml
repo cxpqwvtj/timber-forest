@@ -21,10 +21,32 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%p} [%t] %logger{1} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
 		</encoder>
 	</appender>
+	<appender name="TRAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./log/trail.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./timber/trail/trail_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>1MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%m%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>return null != marker &amp;&amp; marker.contains("TRAIL");</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>ACCEPT</OnMatch>
+		</filter>
+	</appender>
 	<logger name="timberforest.app" level="TRACE" />
 	<root>
 		<level value="INFO" />
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
+		<appender-ref ref="TRAIL" />
 	</root>
 </configuration>

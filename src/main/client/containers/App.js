@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { resetErrorMessage } from '../actions'
+import { resetErrorMessage, createTrail } from '../actions'
 
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles'
 
@@ -15,7 +15,8 @@ class App extends Component {
     errorMessage: PropTypes.string,
     resetErrorMessage: PropTypes.func.isRequired,
     inputValue: PropTypes.string.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
+    createTrail: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -54,7 +55,9 @@ class App extends Component {
     const { children } = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Contents children={children} handleUrlChange={this.handleUrlChange} />
+        <Contents children={children}
+          handleUrlChange={this.handleUrlChange}
+          handleTest={this.props.createTrail.bind(this)} />
       </MuiThemeProvider>
     )
   }
@@ -68,5 +71,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-  resetErrorMessage
+  resetErrorMessage,
+  createTrail
 })(App)
