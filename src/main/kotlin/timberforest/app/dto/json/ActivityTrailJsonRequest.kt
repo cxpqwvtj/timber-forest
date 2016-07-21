@@ -15,5 +15,5 @@ class ActivityTrailJsonRequest {
     @JsonProperty("log_level")
     var log_level: String? = null
     var message: String? = null
-    var action: String? = null
+    var action: Any? = null
 }

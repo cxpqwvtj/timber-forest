@@ -2,14 +2,13 @@ import 'isomorphic-fetch'
 
 function callApi(requestParam) {
   const fullUrl = `${process.env.CONTEXT_PATH}${requestParam.endpoint}`
-  const param = {
+  const param = Object.assign({
       method: requestParam.method,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestParam.body || null)
-    }
+      }
+    }, requestParam.method === 'POST' ? { body: JSON.stringify(requestParam.body || null)} : {})
 
   return fetch(fullUrl, param
     ).then(response =>

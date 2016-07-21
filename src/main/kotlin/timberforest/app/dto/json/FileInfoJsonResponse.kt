@@ -7,8 +7,8 @@ import java.util.*
 /**
  * Created by masahiro on 2016/07/17.
  */
-class FileInfoJsonResponse(val file: File) {
-    val FILE_NAME_DELIMITER = "_"
+class FileInfoJsonResponse(private val file: File) {
+    private val FILE_NAME_DELIMITER = "_"
     val hostName: String
         get() = file.parentFile.name
     val appName: String

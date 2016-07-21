@@ -3,6 +3,7 @@ import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
 import createSagaMiddleware, { END } from 'redux-saga'
 import DevTools from '../containers/DevTools'
+import trail from '../middleware/trail'
 
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware()
@@ -10,7 +11,7 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(sagaMiddleware, createLogger({
+      applyMiddleware(sagaMiddleware, trail, createLogger({
         collapsed: () => true
       })),
       DevTools.instrument()
