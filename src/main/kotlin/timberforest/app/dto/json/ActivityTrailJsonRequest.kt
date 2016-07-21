@@ -13,7 +13,7 @@ class ActivityTrailJsonRequest {
     val timestamp = SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss.SSS").format(Date())
     var tag: String? = null
     @JsonProperty("log_level")
-    var log_level: String? = null
-    var message: String? = null
-    var action: Any? = null
+    var logLevel: String? = null
+    var message: Any? = null
+    var action: String? = null
 }
