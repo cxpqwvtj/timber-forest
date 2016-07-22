@@ -1,0 +1,54 @@
+version: '2'
+services:
+  elasticsearch:
+    restart: always
+    image: elasticsearch:2.3.4
+    volumes:
+      - ./docker/data/elasticsearch/data:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+
+  fluent:
+    restart: always
+    build:
+      context: ./docker/fluent
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      - FLUENTD_CONF=fluent.conf
+    volumes:
+      - ./docker/fluent:/fluentd/etc:ro
+      - ./log/trail.log:/home/fluent/trail.log:ro
+
+  kibana:
+    restart: always
+    image: kibana:4.5.3
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+
+  topbeat:
+    restart: always
+    build:
+      context: ./docker/topbeat
+    depends_on:
+      - elasticsearch
+    pid: "host"
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      - HOST=elasticsearch
+      - PORT=9200
+      - CPU_PER_CORE=false
+      - INDEX=topbeat
+      - PROCS=.*
+      - PERIOD=10
+      - SHIPPER_NAME=
+      - SHIPPER_TAGS=
