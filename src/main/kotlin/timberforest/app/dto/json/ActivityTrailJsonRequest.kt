@@ -10,7 +10,7 @@ import java.util.*
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class ActivityTrailJsonRequest {
-    val timestamp = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date())
+    val timestamp = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(Date())
     var tag: String? = null
     @JsonProperty("log_level")
     var logLevel: String? = null

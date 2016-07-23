@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class ActivityTrailOutputJson(private val request: HttpServletRequest, private val requestJson: ActivityTrailJsonRequest) {
+    @JsonProperty("@timestamp")
     val timestamp = requestJson.timestamp
     val tag = requestJson.tag
     @JsonProperty("log_level")
     val logLevel = requestJson.logLevel
     val message = ObjectMapper().writeValueAsString(requestJson.message)
     val action = requestJson.action
-    @JsonProperty("remote_addr")
-    val remoteAddr=request.remoteAddr
+    @JsonProperty("host_name")
+    val remoteHost=request.remoteHost
 }
