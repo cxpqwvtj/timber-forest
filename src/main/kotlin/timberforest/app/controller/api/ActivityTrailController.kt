@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import timberforest.app.dto.json.ActivityTrailJsonRequest
+import timberforest.app.dto.json.ActivityTrailOutputJson
 import timberforest.app.dto.json.RootJsonResponse
 
 /**
@@ -23,8 +24,7 @@ class ActivityTrailController {
     fun trail(@RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {
         logger.trace("called trail")
         // サーバ側で扱いやすくするため、一旦オブジェクトに変換している
-        val mapper = ObjectMapper()
-        val json = mapper.writeValueAsString(trail)
+        val json = ObjectMapper().writeValueAsString(ActivityTrailOutputJson(trail))
         logger.trace(MarkerFactory.getMarker("TRAIL"), json)
         return RootJsonResponse("")
     }
