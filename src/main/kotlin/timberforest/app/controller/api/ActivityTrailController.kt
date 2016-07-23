@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 import timberforest.app.dto.json.ActivityTrailJsonRequest
 import timberforest.app.dto.json.ActivityTrailOutputJson
 import timberforest.app.dto.json.RootJsonResponse
+import javax.servlet.http.HttpServletRequest
 
 /**
  * Created by masahiro on 2016/07/20.
@@ -21,10 +22,10 @@ class ActivityTrailController {
     private val logger = LoggerFactory.getLogger(ActivityTrailController::class.java)
 
     @RequestMapping(value = "/trail/create", method = arrayOf(RequestMethod.POST))
-    fun trail(@RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {
+    fun trail(request: HttpServletRequest, @RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {
         logger.trace("called trail")
         // サーバ側で扱いやすくするため、一旦オブジェクトに変換している
-        val json = ObjectMapper().writeValueAsString(ActivityTrailOutputJson(trail))
+        val json = ObjectMapper().writeValueAsString(ActivityTrailOutputJson(request, trail))
         logger.trace(MarkerFactory.getMarker("TRAIL"), json)
         return RootJsonResponse("")
     }
