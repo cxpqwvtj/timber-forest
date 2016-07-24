@@ -3,12 +3,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const DEBUG = !(process.env.NODE_ENV === 'production')
 const VERBOSE = process.argv.includes('--verbose')
+const HOT_DEPLOY = !!process.env.HOT_DEPLOY
 let CONTEXT_PATH = `${(process.env.CONTEXT_PATH || '')}`
-
+console.log(HOT_DEPLOY)
 module.exports = {
   context: __dirname + '/src/main/client',
   entry: {
-    'js/bundle': [...(DEBUG ? ['webpack-hot-middleware/client'] : []), './index.js']
+    'js/bundle': [...(HOT_DEPLOY ? ['webpack-hot-middleware/client'] : []), './index.js']
   },
   output: {
     path: __dirname + '/src/main/resources/static',
@@ -24,8 +25,8 @@ module.exports = {
       'process.env.CONTEXT_PATH': `"${CONTEXT_PATH}"`,
       'process.env.NODE_ENV': `"${process.env.NODE_ENV || (DEBUG ? 'development' : 'production')}"` 
     }),
-    ...(DEBUG ? [new webpack.HotModuleReplacementPlugin()] : [
-      new webpack.optimize.OccurenceOrderPlugin(),
+    ...(HOT_DEPLOY ? [new webpack.HotModuleReplacementPlugin()] : []),
+    ...(DEBUG ? [] : [new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.UglifyJsPlugin({ compress: { screw_ie8: true, warnings: VERBOSE } })
