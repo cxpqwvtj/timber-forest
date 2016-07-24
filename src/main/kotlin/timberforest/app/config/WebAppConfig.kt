@@ -12,7 +12,7 @@ import timberforest.app.interceptor.RequestLoggingInterceptor
  * Created by masahiro on 2016/04/14.
  */
 @Component
-class WebAppConfig : WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter() {
+open class WebAppConfig : WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter() {
 
     override fun addInterceptors(registry: InterceptorRegistry?) {
         // for logging
@@ -20,7 +20,7 @@ class WebAppConfig : WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter() {
     }
 
     @Bean
-    fun filterRegistrationBean(): FilterRegistrationBean {
+    open fun filterRegistrationBean(): FilterRegistrationBean {
         // for logging
         val registrationBean = FilterRegistrationBean()
         registrationBean.setFilter(RequestLoggingFilter())
