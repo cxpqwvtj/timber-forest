@@ -5,7 +5,7 @@ const DEBUG = !(process.env.NODE_ENV === 'production')
 const VERBOSE = process.argv.includes('--verbose')
 const HOT_DEPLOY = !!process.env.HOT_DEPLOY
 let CONTEXT_PATH = `${(process.env.CONTEXT_PATH || '')}`
-console.log(HOT_DEPLOY)
+
 module.exports = {
   context: __dirname + '/src/main/client',
   entry: {
