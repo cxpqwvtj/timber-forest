@@ -4,7 +4,7 @@ function callApi(requestParam) {
   const fullUrl = `${process.env.CONTEXT_PATH}${requestParam.endpoint}`
   const param = Object.assign({
       method: requestParam.method,
-      credentials: 'include',
+      credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

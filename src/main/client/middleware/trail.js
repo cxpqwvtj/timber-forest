@@ -11,7 +11,7 @@ export default store => next => action => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+    credentials: 'same-origin',
     body: JSON.stringify({
       [actionKey]: action.type,
       [messageKey]: {action, state},
