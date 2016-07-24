@@ -33,31 +33,15 @@ class App extends Component {
     browserHistory.push(`${process.env.CONTEXT_PATH}${nextValue}`)
   }
 
-  renderErrorMessage() {
-    const { errorMessage } = this.props
-    if (!errorMessage) {
-      return null
-    }
-
-    return (
-      <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
-        {' '}
-        (<a href="#"
-            onClick={this.handleDismissClick}>
-          Dismiss
-        </a>)
-      </p>
-    )
-  }
-
   render() {
     const { children } = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Contents children={children}
+        <Contents
+          children={children}
           handleUrlChange={this.handleUrlChange}
-          handleTest={this.props.createTrail.bind(this)} />
+          handleTest={this.props.createTrail.bind(this)}
+          errorMessage={this.props.errorMessage} />
       </MuiThemeProvider>
     )
   }
