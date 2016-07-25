@@ -10,8 +10,7 @@ services:
 
   fluent:
     restart: always
-    build:
-      context: ./docker/fluent
+    image: cxpqwvtj/fluentd-elasticsearch:latest
     depends_on:
       - elasticsearch
     links:
@@ -36,8 +35,7 @@ services:
 
   topbeat:
     restart: always
-    build:
-      context: ./docker/topbeat
+    image: cxpqwvtj/fluentd-elasticsearch:latest
     depends_on:
       - elasticsearch
     pid: "host"
