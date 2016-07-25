@@ -41,6 +41,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
                 //ログアウト設定
                 .and().logout().permitAll()
                 .logoutRequestMatcher(AntPathRequestMatcher("/api/logout"))
+                //.and().csrf().ignoringAntMatchers("/api/**")
                 .and().csrf().csrfTokenRepository(csrfTokenRepository())
                 .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter::class.java)
     }
