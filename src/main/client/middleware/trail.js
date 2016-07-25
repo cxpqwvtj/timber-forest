@@ -5,11 +5,17 @@ export default store => next => action => {
   const state = store.getState()
   const actionKey = 'action'
   const messageKey = 'message'
+  const [token] = document.cookie.split(';').map((value) => {
+    if (value.split('=').map((value) => value === 'XSRF-TOKEN').length >= 0) {
+      return value.split('=')[1]
+    }
+  })
   fetch('/api/trail/create', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': token
     },
     credentials: 'same-origin',
     body: JSON.stringify({

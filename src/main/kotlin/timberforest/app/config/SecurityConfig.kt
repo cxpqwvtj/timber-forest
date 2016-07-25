@@ -34,7 +34,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {
         http!!.httpBasic()
-        http.csrf().disable()
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
@@ -42,5 +41,34 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
                 //ログアウト設定
                 .and().logout().permitAll()
                 .logoutRequestMatcher(AntPathRequestMatcher("/api/logout"))
+                .and().csrf().csrfTokenRepository(csrfTokenRepository())
+                .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter::class.java)
+    }
+
+    //セッションヘッダーにCSRFトークンを設定
+    private fun csrfTokenRepository(): CsrfTokenRepository {
+        val repository = HttpSessionCsrfTokenRepository()
+        repository.setHeaderName("X-CSRF-TOKEN")
+        return repository
+    }
+
+    private fun csrfHeaderFilter(): Filter {
+        return object : OncePerRequestFilter() {
+            @Throws(ServletException::class, IOException::class)
+            override fun doFilterInternal(request: HttpServletRequest,
+                                          response: HttpServletResponse, filterChain: FilterChain) {
+                val csrf = request.getAttribute(CsrfToken::class.java.getName()) as CsrfToken?
+                if (csrf != null) {
+                    var cookie = WebUtils.getCookie(request, "XSRF-TOKEN")
+                    val token = csrf.getToken()
+                    if (cookie == null || token != null && token != cookie.getValue()) {
+                        cookie = Cookie("XSRF-TOKEN", token)
+                        cookie.setPath("/")
+                        response.addCookie(cookie)
+                    }
+                }
+                filterChain.doFilter(request, response)
+            }
+        }
     }
 }
