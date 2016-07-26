@@ -17,6 +17,8 @@ class ActivityTrailOutputJson(private val request: HttpServletRequest, private v
     val logLevel = requestJson.logLevel
     val message = ObjectMapper().writeValueAsString(requestJson.message)
     val action = requestJson.action
+    @JsonProperty("ip_addr")
+    val ipAddr = request.remoteAddr
     @JsonProperty("host_name")
-    val remoteHost=request.remoteHost
+    val hostName = request.remoteHost
 }
