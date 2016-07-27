@@ -1,0 +1,10 @@
+.gradle
+.idea
+.vscode
+build
+docker
+!docker/timber-forest/entrypoint.sh
+log
+node_modules
+timber
+gradlew.bat
