@@ -24,7 +24,6 @@ class ActivityTrailController {
     @RequestMapping(value = "/trail/create", method = arrayOf(RequestMethod.POST))
     fun trail(request: HttpServletRequest, @RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {
         logger.trace("called trail")
-        // サーバ側で扱いやすくするため、一旦オブジェクトに変換している
         val json = ObjectMapper().writeValueAsString(ActivityTrailOutputJson(request, trail))
         logger.trace(MarkerFactory.getMarker("TRAIL"), json)
         return RootJsonResponse("")
