@@ -1,5 +1,7 @@
-FROM java:openjdk-8-jdk
+FROM java:openjdk-8-jdk-alpine
 MAINTAINER cxpqwvtj
+
+RUN apk add --update bash libstdc++ && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
