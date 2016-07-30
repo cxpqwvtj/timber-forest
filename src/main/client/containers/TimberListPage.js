@@ -30,11 +30,11 @@ class FileListPage extends Component {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHeaderColumn>host name</TableHeaderColumn>
-              <TableHeaderColumn>appID</TableHeaderColumn>
-              <TableHeaderColumn>Size(Byte)</TableHeaderColumn>
-              <TableHeaderColumn>created date</TableHeaderColumn>
-              <TableHeaderColumn>upload date</TableHeaderColumn>
+              <TableHeaderColumn>HOST NAME</TableHeaderColumn>
+              <TableHeaderColumn>APP NAME</TableHeaderColumn>
+              <TableHeaderColumn>SIZE(Byte)</TableHeaderColumn>
+              <TableHeaderColumn>CREATED DATE</TableHeaderColumn>
+              <TableHeaderColumn>UPLOAD DATE</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody stripedRows={true} showRowHover={true}>{rows}</TableBody>
