@@ -13,8 +13,8 @@ export default class MainContent extends Component {
     return (
       <div>
         <div style={{margin: 10, display: 'flex', justifyContent: 'flex-start'}}>
-          <RaisedButton label="log list" onMouseUp={this.props.handleUrlChange.bind(null, '/timber/list')} />
-          <RaisedButton label="test" onMouseUp={this.props.handleTest} style={{marginLeft: '10px'}} />
+          <RaisedButton label="LOG LIST" onMouseUp={this.props.handleUrlChange.bind(null, '/timber/list')} />
+          <RaisedButton label="CREATE TRAIL" onMouseUp={this.props.handleTest} style={{marginLeft: '10px'}} />
         </div>
         {this.props.children}
       </div>
