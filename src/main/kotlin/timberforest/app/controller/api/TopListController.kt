@@ -17,7 +17,7 @@ import java.util.*
 @RequestMapping("/api")
 class TopListController {
 
-    private val logger = LoggerFactory.getLogger(TopListController::class.java)
+    private val logger = LoggerFactory.getLogger(this.javaClass)
 
     @RequestMapping(value = "/timber/list", method = arrayOf(RequestMethod.GET))
     fun index(): RootJsonResponse {

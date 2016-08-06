@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api")
 class ActivityTrailController {
 
-    private val logger = LoggerFactory.getLogger(ActivityTrailController::class.java)
+    private val logger = LoggerFactory.getLogger(this.javaClass)
 
     @RequestMapping(value = "/trail/create", method = arrayOf(RequestMethod.POST))
     fun trail(request: HttpServletRequest, @RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {

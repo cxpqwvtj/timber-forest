@@ -19,7 +19,7 @@ import java.io.IOException
 @RequestMapping("/api")
 class LogFileUploadController {
 
-    private val logger = LoggerFactory.getLogger(LogFileUploadController::class.java)
+    private val logger = LoggerFactory.getLogger(this.javaClass)
 
     @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST))
     fun upload(@RequestPart fileInfo: LogFileJsonRequest,

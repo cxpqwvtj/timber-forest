@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest
  */
 class RequestLoggingFilter : Filter {
 
-    private val logger = LoggerFactory.getLogger(RequestLoggingFilter::class.java)
+    private val logger = LoggerFactory.getLogger(this.javaClass)
     private val LF = "\n"
 
     @Throws(ServletException::class)
