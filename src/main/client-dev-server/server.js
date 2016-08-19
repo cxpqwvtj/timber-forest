@@ -3,6 +3,9 @@ var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
 var proxy = require('http-proxy-middleware')
 var config = require('../../../webpack.config')
+var moment = require('moment')
+
+const LOG_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS'
 
 var app = new (require('express'))()
 var port = 3000
@@ -12,11 +15,11 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler))
 if (!!process.env.SERVER_MOCK) {
   app.get('/api*', function(req, res) {
-    console.log('api get', req.url)
+    console.log(`${moment().format(LOG_DATE_FORMAT)} [GET]  ${req.url}`)
     res.json({})
   })
   app.post('/api*', function(req, res) {
-    console.log('api post', req.url)
+    console.log(`${moment().format(LOG_DATE_FORMAT)} [POST] ${req.url}`)
     res.json({})
   })
 } else {
@@ -24,7 +27,7 @@ if (!!process.env.SERVER_MOCK) {
 }
 
 app.get('/timber*', function(req, res) {
-  console.log('[req]', req.url)
+  console.log(`${moment().format(LOG_DATE_FORMAT)} [GET]  ${req.url}`)
   res.setHeader('Content-Type', 'text/html')
   res.send(compiler.outputFileSystem.readFileSync(compiler.outputPath + '/index.html'))
 })
