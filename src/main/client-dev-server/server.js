@@ -10,7 +10,18 @@ var port = 3000
 var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
-app.use('/api', proxy({target: 'http://localhost:8080', changeOrigin: false}))
+if (!!process.env.SERVER_MOCK) {
+  app.get('/api*', function(req, res) {
+    console.log('api get', req.url)
+    res.json({})
+  })
+  app.post('/api*', function(req, res) {
+    console.log('api post', req.url)
+    res.json({})
+  })
+} else {
+  app.use('/api', proxy({target: 'http://localhost:8080', changeOrigin: false}))
+}
 
 app.get('/timber*', function(req, res) {
   console.log('[req]', req.url)

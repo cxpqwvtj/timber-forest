@@ -16,7 +16,8 @@
       ],
       "env": {
         "NODE_ENV": "development",
-        "HOT_DEPLOY": "true"
+        "HOT_DEPLOY": "true",
+        "SERVER_MOCK": "true"
       },
       "externalConsole": false,
       "sourceMaps": false,

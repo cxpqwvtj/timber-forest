@@ -49,7 +49,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=development webpack --progress --colors",
     "package": "NODE_ENV=production webpack --release --progress --colors",
-    "start": "NODE_ENV=development HOT_DEPLOY=true node src/main/client-dev-server/server.js",
+    "start": "NODE_ENV=development HOT_DEPLOY=true SERVER_MOCK=true node src/main/client-dev-server/server.js",
     "watch": "NODE_ENV=development webpack --watch --progress --colors"
   }
 }
