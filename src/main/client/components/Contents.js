@@ -15,6 +15,14 @@ export default class Contents extends Component {
   render() {
     return (
       <div>
+        <div style={{height: '0px', display: 'flex', justifyContent: 'center', visibility: 'hidden'}}>
+          <div style={{width: '300px', height: '300px', borderRadius: '300px', backgroundColor: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <div style={{fontSize: '100px', color: 'white'}}>400</div>
+          </div>
+          <div style={{width: '300px', height: '300px', borderRadius: '300px', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <div style={{fontSize: '100px', color: 'white'}}>500</div>
+          </div>
+        </div>
         <Header />
         <ErrorBox message={this.props.errorMessage} />
         <MainContent

@@ -14,12 +14,18 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 if (!!process.env.SERVER_MOCK) {
-  app.get('/api*', function(req, res) {
-    console.log(`${moment().format(LOG_DATE_FORMAT)} [GET]  ${req.url}`)
+  app.post('/api/trail/create', function(req, res) {
+    console.log(`${moment().format(LOG_DATE_FORMAT)} [${(req.method + '    ').slice(0, 4)}] ${req.url}`)
+    //res.status(500)
     res.json({})
   })
+  app.get('/api*', function(req, res) {
+    console.log(`${moment().format(LOG_DATE_FORMAT)} [${(req.method + '    ').slice(0, 4)}] ${req.url}`)
+    res.json({})
+    //res.json({error: {message: 'エラーです'}})
+  })
   app.post('/api*', function(req, res) {
-    console.log(`${moment().format(LOG_DATE_FORMAT)} [POST] ${req.url}`)
+    console.log(`${moment().format(LOG_DATE_FORMAT)} [${(req.method + '    ').slice(0, 4)}] ${req.url}`)
     res.json({})
   })
 } else {
@@ -27,7 +33,7 @@ if (!!process.env.SERVER_MOCK) {
 }
 
 app.get('/timber*', function(req, res) {
-  console.log(`${moment().format(LOG_DATE_FORMAT)} [GET]  ${req.url}`)
+  console.log(`${moment().format(LOG_DATE_FORMAT)} [${(req.method + '    ').slice(0, 4)}] ${req.url}`)
   res.setHeader('Content-Type', 'text/html')
   res.send(compiler.outputFileSystem.readFileSync(compiler.outputPath + '/index.html'))
 })

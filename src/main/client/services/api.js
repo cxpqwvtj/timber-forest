@@ -15,7 +15,7 @@ function callApi(requestParam) {
     ).then(response =>
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
-      if (!response.ok) {
+      if (!response.ok || !!json.error) {
         return Promise.reject(json)
       }
 
