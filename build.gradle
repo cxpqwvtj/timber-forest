@@ -9,7 +9,6 @@ buildscript {
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    classpath "org.springframework:springloaded:1.2.5.RELEASE"
   }
 }
 
@@ -29,5 +28,6 @@ dependencies {
   compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
   compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
   compile "org.codehaus.janino:janino:3.0.0"
+  compile("org.springframework.boot:spring-boot-devtools")
   testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
