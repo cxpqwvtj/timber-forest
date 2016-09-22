@@ -1,6 +1,9 @@
 package timberforest.app.filter
 
 import org.slf4j.LoggerFactory
+import org.springframework.core.Ordered
+import org.springframework.core.annotation.Order
+import org.springframework.stereotype.Component
 import java.io.IOException
 import javax.servlet.*
 import javax.servlet.http.HttpServletRequest
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServletRequest
 /**
  * Created by masahiro on 2016/04/14.
  */
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 class RequestLoggingFilter : Filter {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
