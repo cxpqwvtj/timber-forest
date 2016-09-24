@@ -28,6 +28,6 @@ dependencies {
   compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
   compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
   compile "org.codehaus.janino:janino:3.0.0"
-  compile("org.springframework.boot:spring-boot-devtools")
+  compile("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
   testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
