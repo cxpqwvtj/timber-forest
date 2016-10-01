@@ -23,7 +23,6 @@ open class ActivityTrailController {
 
     @PostMapping(value = "/trail/create")
     open fun trail(request: HttpServletRequest, @RequestBody trail: ActivityTrailJsonRequest): RootJsonResponse {
-        logger.trace("called trail")
         val json = ObjectMapper().writeValueAsString(ActivityTrailOutputJson(request, trail))
         logger.trace(MarkerFactory.getMarker("TRAIL"), json)
         return RootJsonResponse("")

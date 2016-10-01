@@ -21,7 +21,6 @@ open class TopListController {
 
     @GetMapping(value = "/timber/list")
     open fun index(): RootJsonResponse {
-        logger.trace("index")
         val currentPath = File(System.getProperty("user.dir")).toPath()
         val logFileInfo = mutableMapOf<String, FileInfoJsonResponse>()
         for (file in nestedFiles(currentPath.resolve("timber").toFile())) {
