@@ -9,17 +9,23 @@ import javax.servlet.http.HttpServletResponse
 /**
  * Created by masahiro on 2016/04/14.
  */
-class RequestLoggingInterceptor : HandlerInterceptorAdapter() {
+class RequestLoggingInterceptor(val loggingType: LoggingType) : HandlerInterceptorAdapter() {
+
+    enum class LoggingType(val type: Int) {
+        NOTHING(0),
+        SIMPLE(1),
+        VERBOSE(2)
+    }
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
     private val LF = "\n"
 
     @Throws(Exception::class)
-    override fun preHandle(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?): Boolean {
-        if (request != null) {
-            val list = mutableListOf<String>()
+    override fun preHandle(request: HttpServletRequest, response: HttpServletResponse?, handler: Any?): Boolean {
+        val list = mutableListOf<String>()
+        if (LoggingType.NOTHING.ordinal < loggingType.ordinal) {
             list.add("*********************** BEGIN ${request.servletPath}")
-            if (logger.isTraceEnabled) {
+            if (LoggingType.SIMPLE.ordinal < loggingType.ordinal) {
                 list.add("[URL]${request.requestURL} [query]${request.queryString} [method]${request.method}")
                 list.add("[protocol]${request.protocol} [scheme]${request.scheme} [secure]${request.isSecure} [RemoteAddr]${request.remoteAddr} [RemoteHost]${request.remoteHost} [SessionId]${request.requestedSessionId} [class]${request.javaClass.name}")
                 list.add("[ContentLength]${request.contentLength} [contentType]${request.contentType} [encoding]${request.characterEncoding} [locale]${request.locale} [locales]${request.locales.toList().joinToString(" ")}")
@@ -44,8 +50,8 @@ class RequestLoggingInterceptor : HandlerInterceptorAdapter() {
     }
 
     @Throws(Exception::class)
-    override fun afterCompletion(request: HttpServletRequest?, response: HttpServletResponse?, handler: Any?, ex: Exception?) {
-        if (request != null) {
+    override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse?, handler: Any?, ex: Exception?) {
+        if (LoggingType.NOTHING.ordinal < loggingType.ordinal) {
             logger.debug("***********************  END  ${request.servletPath}")
         }
     }

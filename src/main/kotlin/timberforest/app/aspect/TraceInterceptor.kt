@@ -21,11 +21,11 @@ class TraceInterceptor {
         var ret: Any? = null
         val className = TargetLengthBasedClassNameAbbreviator(20).abbreviate(proceedingJoinPoint.target.javaClass.name)
         try {
-            logger.trace("[BEGIN]${className} # ${proceedingJoinPoint.signature.name} ${proceedingJoinPoint.args}")
+            logger.trace("[BEGIN]${className}#${proceedingJoinPoint.signature.name} ${proceedingJoinPoint.args}")
             ret = proceedingJoinPoint.proceed()
             return ret
         } finally {
-            logger.trace("[ END ]${className} # ${proceedingJoinPoint.signature.name} ${ret}")
+            logger.trace("[ END ]${className}#${proceedingJoinPoint.signature.name} ${ret}")
         }
     }
 }

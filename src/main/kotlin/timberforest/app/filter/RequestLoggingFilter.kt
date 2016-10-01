@@ -22,7 +22,7 @@ class RequestLoggingFilter : Filter {
         VERBOSE(2)
     }
 
-    @Value("\${app.log.filter.enabled}")
+    @Value("\${app.log.filter.type}")
     private val loggingType: FilterLoggingType = FilterLoggingType.NOTHING
 
     private val logger = LoggerFactory.getLogger(this.javaClass)

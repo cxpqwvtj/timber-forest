@@ -1,5 +1,6 @@
 package timberforest.app.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
@@ -11,8 +12,11 @@ import timberforest.app.interceptor.RequestLoggingInterceptor
 @Component
 open class WebAppConfig : WebMvcConfigurerAdapter() {
 
+    @Value("\${app.log.interceptor.type}")
+    private val loggingType: RequestLoggingInterceptor.LoggingType = RequestLoggingInterceptor.LoggingType.NOTHING
+
     override fun addInterceptors(registry: InterceptorRegistry?) {
         // for logging
-        registry!!.addInterceptor(RequestLoggingInterceptor()).addPathPatterns("/**")
+        registry!!.addInterceptor(RequestLoggingInterceptor(loggingType)).addPathPatterns("/**")
     }
 }
