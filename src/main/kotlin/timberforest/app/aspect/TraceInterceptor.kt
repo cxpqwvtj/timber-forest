@@ -1,5 +1,7 @@
 package timberforest.app.aspect
 
+import ch.qos.logback.classic.pattern.TargetLengthBasedClassNameAbbreviator
+import ch.qos.logback.core.pattern.SpacePadder
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -17,12 +19,13 @@ class TraceInterceptor {
     @Around("execution(* timberforest.app.controller..*.*(..))")
     fun invoke(proceedingJoinPoint: ProceedingJoinPoint): Any? {
         var ret: Any? = null
+        val className = TargetLengthBasedClassNameAbbreviator(20).abbreviate(proceedingJoinPoint.target.javaClass.name)
         try {
-            logger.trace("[BEGIN]${proceedingJoinPoint.target.javaClass.name}#${proceedingJoinPoint.signature.name} ${proceedingJoinPoint.args}")
+            logger.trace("[BEGIN]${className} # ${proceedingJoinPoint.signature.name} ${proceedingJoinPoint.args}")
             ret = proceedingJoinPoint.proceed()
             return ret
         } finally {
-            logger.trace("[ END ]${proceedingJoinPoint.target.javaClass.name}#${proceedingJoinPoint.signature.name} ${ret}")
+            logger.trace("[ END ]${className} # ${proceedingJoinPoint.signature.name} ${ret}")
         }
     }
 }
