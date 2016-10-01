@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 class TraceInterceptor {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    @Around("")
+    @Around("execution(* timberforest.app.controller.*.*(..))")
     fun invoke(proceedingJoinPoint: ProceedingJoinPoint): Any {
         var ret: Any? = null
         try {
