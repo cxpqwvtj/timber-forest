@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse
  */
 @Controller
 @RequestMapping("/")
-class RootController {
+open class RootController {
     @RequestMapping(path = arrayOf("", "timber/**"), method = arrayOf(RequestMethod.GET))
-    fun root(response: HttpServletResponse) {
+    open fun root(response: HttpServletResponse) {
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
         response.outputStream.use { it.write(this.javaClass.getResource("/static/index.html").readBytes()) }
     }

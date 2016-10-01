@@ -15,12 +15,12 @@ import java.util.*
  */
 @RestController
 @RequestMapping("/api")
-class TopListController {
+open class TopListController {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     @RequestMapping(value = "/timber/list", method = arrayOf(RequestMethod.GET))
-    fun index(): RootJsonResponse {
+    open fun index(): RootJsonResponse {
         logger.trace("index")
         val currentPath = File(System.getProperty("user.dir")).toPath()
         val logFileInfo = mutableMapOf<String, FileInfoJsonResponse>()
