@@ -46,7 +46,7 @@ class RequestLoggingFilter : Filter {
         }
         chain.doFilter(servletRequest, servletResponse)
         if (logger.isDebugEnabled) {
-            logger.debug("*********************** END ${request.servletPath}")
+            logger.debug("***********************  END  ${request.servletPath}")
         }
     }
 
