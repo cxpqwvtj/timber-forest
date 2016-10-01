@@ -25,10 +25,10 @@ class RequestLoggingFilter : Filter {
 
     @Throws(IOException::class, ServletException::class)
     override fun doFilter(servletRequest: ServletRequest, servletResponse: ServletResponse, chain: FilterChain) {
+        val request = servletRequest as HttpServletRequest
         if (logger.isDebugEnabled) {
-            val request = servletRequest as HttpServletRequest
             val list = mutableListOf<String>()
-            list.add("*********************** BEGIN")
+            list.add("*********************** BEGIN ${request.servletPath}")
             list.add("[URL]${request.requestURL} [query]${request.queryString} [method]${request.method}")
             if (logger.isTraceEnabled) {
                 list.add("[protocol]${request.protocol} [scheme]${request.scheme} [secure]${request.isSecure} [RemoteAddr]${request.remoteAddr} [RemoteHost]${request.remoteHost} [SessionId]${request.requestedSessionId} [class]${request.javaClass.name}")
@@ -46,7 +46,7 @@ class RequestLoggingFilter : Filter {
         }
         chain.doFilter(servletRequest, servletResponse)
         if (logger.isDebugEnabled) {
-            logger.debug("*********************** END$LF")
+            logger.debug("*********************** END ${request.servletPath}")
         }
     }
 
