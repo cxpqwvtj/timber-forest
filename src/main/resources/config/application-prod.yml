@@ -1,0 +1,10 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+app:
+  log:
+    filter:
+      type: VERBOSE
+    interceptor:
+      type: NOTHING
