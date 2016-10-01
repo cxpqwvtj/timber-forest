@@ -21,7 +21,7 @@ open class LogFileUploadController {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/upload")
     open fun upload(@RequestPart fileInfo: LogFileJsonRequest,
                @RequestParam zipLogFile: MultipartFile): RootJsonResponse {
         val userDir = File(System.getProperty("user.dir")).toPath()

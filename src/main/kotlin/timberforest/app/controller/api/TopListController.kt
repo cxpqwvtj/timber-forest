@@ -1,8 +1,8 @@
 package timberforest.app.controller.api
 
 import org.slf4j.LoggerFactory
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import timberforest.app.dto.json.FileInfoJsonResponse
 import timberforest.app.dto.json.LogFileJsonResponse
@@ -19,7 +19,7 @@ open class TopListController {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    @RequestMapping(value = "/timber/list", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/timber/list")
     open fun index(): RootJsonResponse {
         logger.trace("index")
         val currentPath = File(System.getProperty("user.dir")).toPath()
